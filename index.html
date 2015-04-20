@@ -5,28 +5,405 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=680, user-scalable=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>GDS theme for Shower.js</title>
+    <title>An introduction to Python web development for GDS</title>
     <link rel="stylesheet" href="styles/gds.css">
+    <link rel="stylesheet" href="styles/highlightjs-sunburst.min.css">
   </head>
 
   <body class="list">
     <header class="caption">
-      <h1><abbr title="Government Digital Service">GDS</abbr> theme for Shower.js</h1>
+      <h1>An introduction to Python web development for <abbr title="Government Digital Service">GDS</abbr></h1>
       <p>
         By
-        <a href="https://github.com/alexmuller">Alex Muller</a>,
-        based on
-        <a href="https://github.com/shower/bright">Bright</a>
+        <a href="https://github.com/danielroseman">Daniel Roseman</a>
+        and
+        <a href="https://github.com/robyoung">Rob Young</a>
       </p>
     </header>
 
     <section class="slide intro"><div>
-      <p>Firstname Secondname</p>
-      <p>Job title</p>
+      <p>Daniel Roseman &amp; Rob Young</p>
+      <p>Developers</p>
       <p>Government Digital Service</p>
-      <p>@yourtwitterhandle</p>
     </div></section>
 
+    <section class="slide"><div>
+      <h2 class="big">Who is this for?</h2>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">Python</h2>
+      <p class="small"><a href="https://www.python.org/">https://www.python.org/</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">The Zen of Python</h2>
+      <p class="small"><a href="https://www.python.org/dev/peps/pep-0020/">https://www.python.org/dev/peps/pep-0020/</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>The Zen of Python</h2>
+
+      <p>Beautiful is better than ugly</p>
+      <p>Explicit is better than implicit</p>
+      <p>Readability counts</p>
+      <p>Sparse is better than dense</p>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">Syntax</h2>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Syntax</h2>
+      <pre><code class="python">from datetime import date
+import sys
+
+def greet(name):
+    """Greet someone with today's date"""
+    print("Hello {}, today is {}".format(name,
+                                         date.today()))
+
+if __name__ == '__main__':
+    name = sys.argv[1]
+    greet(name)</code></pre>
+    </div></section>
+
+
+    <section class="slide"><div>
+      <h2 class="big">Gotchas &amp; the unusual</h2>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">Mutable argument defaults</h2>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Mutable argument defaults</h2>
+      <pre><code class="python">def test(l=[]):
+    l.append('a')
+    return l
+
+print(test())
+print(test())</code></pre>
+      <p></p>
+      <pre><code>['a']
+['a', 'a']</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Mutable argument defaults</h2>
+      <pre><code class="python">def test(l=None):
+    if l is None:
+        l = []
+    l.append('a')
+    return l
+
+print(test())
+print(test())</code></pre>
+      <p></p>
+      <pre><code>['a']
+['a']</code></pre>
+    </div></section>
+
+
+    <section class="slide"><div>
+      <h2 class="big">Decorators</h2>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Decorators</h2>
+      <pre><code class="python">def boo(func):
+    def inner(*args, **kwargs):
+        return "BOO! {}".format(func(*args, **kwargs))
+    return inner
+# TODO: functools
+@boo
+def hello(name):
+    return "Hello {}".format(name)</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Decorators</h2>
+      <pre><code class="python">print(hello("GDS"))</code></pre>
+      <p></p>
+      <pre><code>BOO! Hello GDS</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Decorators</h2>
+      <pre><code class="python">def alert(prefix):
+    def decorator(func):
+        def inner(*args, **kwargs):
+            return "{}! {}".format(prefix,
+                                   func(*args, **kwargs))
+        return inner
+    return decorator
+
+@alert("BOO")
+def hello(name):
+    return "Hello {}".format(name)</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">Comprehensions</h2>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>List comprehensions</h2>
+      <pre><code class="python">[x**2 for x in range(10)]</code></pre>
+      &nbsp;
+      <pre><code>[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</code></pre>
+      &nbsp;
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Generator comprehensions</h2>
+      <pre><code class="python">(x**2 for x in range(10))</code></pre>
+      &nbsp;
+      <pre><code>generator object &lt;genexpr&gt; at 0x10bc2ecd0</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Dictionary comprehensions</h2>
+      <pre><code class="python">{k:v**2 for k, v in {'x': 2, 'y': 4}.items()}</code></pre>
+      &nbsp;
+      <pre><code>{'y': 16, 'x': 4}</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">Filesystem layout</h2>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Filesystem layout</h2>
+      <pre><code>outer.py
+inner/
+    __init__.py
+    stuff.py</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Filesystem layout</h2>
+      <p class="small"><code>outer.py</code></p>
+      <pre><code class="python">from .inner import hello
+
+if __name__ == '__main__':
+    print(hello("GDS"))</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Filesystem layout</h2>
+      <p class="small"><code>inner/__init__.py</code></p>
+      <pre><code class="python">from .stuff import hello</code></pre>
+      &nbsp;
+      <p class="small"><code>inner/stuff.py</code></p>
+      <pre><code class="python">def hello(name):
+    print("Hello {}".format(name))</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">Python 3?</h2>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">Your environment</h2>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">pip</h2>
+      <p><a href="https://pip.pypa.io">https://pip.pypa.io</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>pip</h2>
+      <pre><code>pip install Django</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>pip</h2>
+      <pre><code>pip install Django==1.8</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>pip</h2>
+      <pre><code class="shell">pip install -e git@github.com:my/project.git@1.2.3</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">The cheese shop</h2>
+      <p><a href="https://pypi.python.org">https://pypi.python.org</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">Your project environment</h2>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">virtualenv</h2>
+      <p><a href="https://virtualenv.pypa.io">https://virtualenv.pypa.io</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>virtualenv</h2>
+      <pre><code class="shell">pip install virtualenv</code></pre>
+      &nbsp;
+      <pre><code class="shell">virtualenv ./venv</code></pre>
+      &nbsp;
+      <pre><code class="shell">./venv/bin/pip install Django</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>virtualenv</h2>
+      <pre><code class="shell">source ./venv/bin/activate</code></pre>
+      &nbsp;
+      <pre><code class="shell">pip install Django</code></pre>
+      &nbsp;
+      <pre><code class="shell">deactivate</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>virtualenv</h2>
+      <p class="small"><code>requirements.txt</code></p>
+      <pre><code class="shell">Django==1.8
+requests==2.6.0</code></pre>
+      &nbsp;
+      <pre><code class="shell">pip install -r requirements.txt</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>virtualenv</h2>
+      <pre><code class="shell">pip freeze</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">virtualenvwrapper</h2>
+      <p class="small"><a href="https://virtualenvwrapper.readthedocs.org/">https://virtualenvwrapper.readthedocs.org/</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>virtualenvwrapper</h2>
+      <pre><code class="shell">mkvirtualenv myenv</code></pre>
+      &nbsp;
+      <pre><code class="shell">workon myvenv</code></pre>
+      &nbsp;
+      <pre><code class="shell">deactivate</code></pre>
+      &nbsp;
+      <pre><code class="shell">rmvirtualenv myvenv</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">Web development</h2>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">WSGI (Whiskey)</h2>
+      <p class="small"><a href="https://www.python.org/dev/peps/pep-0333/">https://www.python.org/dev/peps/pep-0333/</a></p>
+      <p class="small"><a href="http://en.wikipedia.org/wiki/Web_Server_Gateway_Interface">http://en.wikipedia.org/wiki/Web_Server_Gateway_Interface</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">Web frameworks</h2>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Web frameworks</h2>
+      <p>Django <a href="https://www.djangoproject.com/">https://www.djangoproject.com/</a></p>
+      <p>Flask <a href="http://flask.pocoo.org/">http://flask.pocoo.org/</a></p>
+      <p>Twisted <a href="https://twistedmatrix.com">https://twistedmatrix.com</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Flask</h2>
+      <pre><code class="python">from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello World!"
+
+if __name__ == "__main__":
+    app.run()</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Twisted</h2>
+      <pre><code class="python">from twisted.internet import protocol, reactor, endpoints
+
+class Echo(protocol.Protocol):
+    def dataReceived(self, data):
+        self.transport.write(data)
+
+class EchoFactory(protocol.Factory):
+    def buildProtocol(self, addr):
+        return Echo()
+
+endpoints.serverFromString(reactor, "tcp:1234") \
+         .listen(EchoFactory())
+reactor.run()</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Web frameworks Ruby comparison</h2>
+      <p>Django - Rails</p>
+      <p>Flask - Sinatra</p>
+      <p>Twisted - EventMachine</p>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">Testing</h2>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2 class="big">Testing</h2>
+      <p>nosetests <a href="https://nose.readthedocs.org/">https://nose.readthedocs.org/</a></p>
+      <p>py.test <a href="http://pytest.org/">http://pytest.org/</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Testing</h2>
+      <p class="small">unittest <a href="https://docs.python.org/2/library/unittest.html">https://docs.python.org/2/library/unittest.html</a></p>
+      <pre><code class="python">import unittest
+
+class TestStuff(unittest.TestCase):
+    def setUp(self):
+        # do some setup
+
+    def tearDown(self):
+        # do some tear down
+
+    def test_foo(self):
+        # test some foo</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Testing</h2>
+      <pre><code class="python">def test_something():
+    # test something</code></pre>
+    </div></section>
+
+    <section class="slide"><div>
+      <h2>Testing</h2>
+      <p class="small">doctest <a href="https://docs.python.org/2/library/doctest.html">https://docs.python.org/2/library/doctest.html</a></p>
+      <pre><code class="python">def add_one(n):
+    """Returns something plus 1
+
+    >>> add_one(1)
+    2
+    >>> add_one(2)
+    3
+    """
+    return n + 1</code></pre>
+    </div></section>
+
+
+
+
+
+
+
+
+    
     <section class="slide"><div>
       <h2>Text</h2>
       <p>Obviously presentations have words in them.</p>
@@ -57,16 +434,14 @@
 
     <section class="slide"><div>
       <h2>Code blocks</h2>
-      <pre><code>class <mark>Checkout</mark>
-  <mark class="important">def</mark> total
-    <mark class="comment"># Return the total</mark>
+      <pre><code class="ruby">class Checkout
+  def total
+    # Return the total
     1 + 2 + 3
   end
 end
 checkout = Checkout.new
-checkout.total <mark class="comment"># => 6</mark>
-
-      </code></pre>
+checkout.total # => 6</code></pre>
     </div></section>
 
     <section class="slide"><div>
@@ -175,12 +550,14 @@ checkout.total <mark class="comment"># => 6</mark>
 
     <script>
       var footerText = {
-        left: 'Your name',
+        left: 'Daniel Roseman &amp; Rob Young',
         right: 'GDS'
       };
     </script>
 
     <script src="scripts/gds.js"></script>
+    <script src="scripts/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <script src="shower/shower.min.js"></script>
 
   </body>
