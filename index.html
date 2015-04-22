@@ -45,9 +45,9 @@
       <h2>The Zen of Python</h2>
 
       <p>Beautiful is better than ugly</p>
-      <p>Explicit is better than implicit</p>
       <p>Readability counts</p>
       <p>Sparse is better than dense</p>
+      <p>Explicit is better than implicit</p>
     </div></section>
 
     <section class="slide"><div>
@@ -92,23 +92,8 @@ def hello(name):
     <section class="slide"><div>
       <h2>Decorators</h2>
       <pre><code class="python">print(hello("GDS"))</code></pre>
-      <p></p>
+      &nbsp;
       <pre><code>BOO! Hello GDS</code></pre>
-    </div></section>
-
-    <section class="slide"><div>
-      <h2>Decorators</h2>
-      <pre><code class="python">import functools
-
-def boo(func):
-    @functools.wraps(func)
-    def inner(*args, **kwargs):
-        return "BOO! {}".format(func(*args, **kwargs))
-    return inner
-
-@boo
-def hello(name):
-    return "Hello {}".format(name)</code></pre>
     </div></section>
 
     <section class="slide"><div>
@@ -278,7 +263,7 @@ if __name__ == '__main__':
     </div></section>
 
     <section class="slide"><div>
-      <h2 class="big">The cheese shop</h2>
+      <h2 class="big">PyPI</h2>
       <p class="small"><a href="https://pypi.python.org">https://pypi.python.org</a></p>
     </div></section>
 
@@ -289,6 +274,7 @@ if __name__ == '__main__':
     <section class="slide"><div>
       <h2 class="big">virtualenv</h2>
       <p class="small"><a href="https://virtualenv.pypa.io">https://virtualenv.pypa.io</a></p>
+      <p class="small"><a href="https://virtualenvwrapper.readthedocs.org/">https://virtualenvwrapper.readthedocs.org/</a></p>
     </div></section>
 
     <section class="slide"><div>
@@ -328,27 +314,6 @@ requirements.txt</code></pre>
     </div></section>
 
     <section class="slide"><div>
-      <h2>virtualenv</h2>
-      <pre><code class="shell">pip freeze</code></pre>
-    </div></section>
-
-    <section class="slide"><div>
-      <h2 class="big">virtualenvwrapper</h2>
-      <p class="small"><a href="https://virtualenvwrapper.readthedocs.org/">https://virtualenvwrapper.readthedocs.org/</a></p>
-    </div></section>
-
-    <section class="slide"><div>
-      <h2>virtualenvwrapper</h2>
-      <pre><code class="shell">mkvirtualenv myenv</code></pre>
-      &nbsp;
-      <pre><code class="shell">workon myvenv</code></pre>
-      &nbsp;
-      <pre><code class="shell">deactivate</code></pre>
-      &nbsp;
-      <pre><code class="shell">rmvirtualenv myvenv</code></pre>
-    </div></section>
-
-    <section class="slide"><div>
       <h2 class="big">Web development</h2>
     </div></section>
 
@@ -384,23 +349,6 @@ def hello():
 
 if __name__ == "__main__":
     app.run()</code></pre>
-    </div></section>
-
-    <section class="slide"><div>
-      <h2>Twisted</h2>
-      <pre><code class="python">from twisted.internet import protocol, reactor, endpoints
-
-class Echo(protocol.Protocol):
-    def dataReceived(self, data):
-        self.transport.write(data)
-
-class EchoFactory(protocol.Factory):
-    def buildProtocol(self, addr):
-        return Echo()
-
-endpoints.serverFromString(reactor, "tcp:1234") \
-         .listen(EchoFactory())
-reactor.run()</code></pre>
     </div></section>
 
     <section class="slide"><div>
@@ -593,6 +541,8 @@ requests.post('https://example.com', data={'foo':'bar'})</code></pre>
       <h2 class="big">Resources</h2>
       <p>The Hitchhiker’s Guide to Python</p>
       <p class="small"><a href="http://docs.python-guide.org/">http://docs.python-guide.org/</a></p>
+      <p>The Python Wiki</p>
+      <p class="small"><a href="https://wiki.python.org/moin/">https://wiki.python.org/moin/</a></p>
       <p>Awesome Python</p>
       <p class="small"><a href="https://github.com/vinta/awesome-python">https://github.com/vinta/awesome-python</a></p>
     </div></section>
