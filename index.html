@@ -132,7 +132,7 @@ def hello(name):
 
     <section class="slide"><div>
       <h2>Generators</h2>
-      <pre><code class="python">def def firstn(n):
+      <pre><code class="python">def firstn(n):
     num = 0
     while num &lt; n:
         yield num
@@ -248,39 +248,6 @@ if __name__ == '__main__':
     </div></section>
 
     <section class="slide"><div>
-      <h2 class="big">Mutable argument defaults</h2>
-    </div></section>
-
-    <section class="slide"><div>
-      <h2>Mutable argument defaults</h2>
-      <pre><code class="python">def test(l=[]):
-    l.append('a')
-    return l
-
-print(test())
-print(test())</code></pre>
-      <p></p>
-      <pre><code>['a']
-['a', 'a']</code></pre>
-    </div></section>
-
-    <section class="slide"><div>
-      <h2>Mutable argument defaults</h2>
-      <pre><code class="python">def test(l=None):
-    if l is None:
-        l = []
-    l.append('a')
-    return l
-
-print(test())
-print(test())</code></pre>
-      <p></p>
-      <pre><code>['a']
-['a']</code></pre>
-    </div></section>
-
-
-    <section class="slide"><div>
       <h2 class="big">Python 3?</h2>
     </div></section>
 
@@ -304,15 +271,9 @@ print(test())</code></pre>
     <section class="slide"><div>
       <h2>pip</h2>
       <pre><code>pip install Django</code></pre>
-    </div></section>
-
-    <section class="slide"><div>
-      <h2>pip</h2>
+      &nbsp;
       <pre><code>pip install Django==1.8</code></pre>
-    </div></section>
-
-    <section class="slide"><div>
-      <h2>pip</h2>
+      &nbsp;
       <pre><code class="shell">pip install -e git@github.com:my/project.git@1.2.3</code></pre>
     </div></section>
 
